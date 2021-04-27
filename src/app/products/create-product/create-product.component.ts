@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from 'src/app/model/product';
+import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
@@ -9,7 +10,7 @@ export class CreateProductComponent implements OnInit {
 
   public message = '';
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
   }
@@ -20,8 +21,7 @@ export class CreateProductComponent implements OnInit {
     }else{
       console.log(productForm)
       const product: Product = productForm.value.product;
-      console.log(productForm.value)
-      console.log(product)
+      this.productService.createProduct(product)
     }
   }
 
