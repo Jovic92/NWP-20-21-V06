@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row">
+        <!-- <div class="col-4 product-item" [class]="product.isOnSale ? 'product-item sale' : '' "> -->
+
+        <div *ngFor="let product of products; let i = index" class="col-4 product-item" [class.sale]="product.isOnSale">
+
+            <div class="image">
+                <img [src]="product.imageUrl">
+            </div>
+            <div class="details">
+                <div>{{product.name}}</div>
+                <div>{{product.price}} RSD</div>
+                <div>
+                    <!-- <button [disabled]="product.quantity == 0" (click)="decrementInCart()">-</button> -->
+                    <button *ngIf="product.quantity > 0" (click)="decrementInCart(i)">-</button>
+                    <!-- <select (change)="setQuantity($event.target.value, i)"> -->
+                    <select [(ngModel)]="products[i].tempQuant" (ngModelChange)="setQuantity2(i)">
+                        <option [value]="qty" *ngFor="let qty of quantities">
+                            {{qty}}
+                        </option>
+                    </select>
+                    <span>{{product.quantity}}</span>
+                    <button (click)="incrementInCart(i)">+</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="col-4 product-item" [class.sale]="product2.isOnSale">
+            <div class="image">
+                <img [src]="product2.imageUrl">
+            </div>
+            <div class="details">
+                <div>{{product2.name}}</div>
+                <div>{{product2.price}} RSD</div>
+                <div>
+                    <button *ngIf="product2.quantity > 0" (click)="decrementInCart()">-</button>
+
+                    <span>{{product2.quantity}}</span>
+                    <button (click)="incrementInCart()">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4 product-item" [class.sale]="product3.isOnSale">
+            <div class="image">
+                <img [src]="product3.imageUrl">
+            </div>
+            <div class="details">
+                <div>{{product3.name}}</div>
+                <div>{{product3.price}} RSD</div>
+                <div>
+                    <button *ngIf="product3.quantity > 0" (click)="decrementInCart()">-</button>
+                    <select>
+                        <option [value]="qty" *ngFor = "let qty of quantities">
+                            {{qty}}
+                        </option>
+                    </select>
+                    <span>{{product3.quantity}}</span>
+                    <button (click)="incrementInCart()">+</button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>

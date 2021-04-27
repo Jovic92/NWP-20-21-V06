@@ -1,0 +1,43 @@
+<h3>Create product</h3>
+
+<div class="container">
+
+    <form (ngSubmit)=createProduct(productForm) #productForm="ngForm">
+        <div class="form-group" ngModelGroup="product">
+            <div>
+                <input type="text" ngModel #productName="ngModel" name="name" placeholder="Product name" required>
+            </div>
+            <div class="error" *ngIf="productName.invalid && (productName.dirty || message)">
+                Product name is required.
+            </div>
+
+            <div>
+                <input type="number" ngModel #productPrice="ngModel" name="price" placeholder="Product price" required>
+            </div>
+            <div class="error" *ngIf="productPrice.invalid && (productPrice.dirty || message)">
+                Product price is required.
+            </div>
+
+            <div>
+                <input type="text" ngModel #productImageUrl="ngModel" name="imageUrl" placeholder="Product image URL"
+                    required pattern="http(s?)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$">
+            </div>
+            <div class="error" *ngIf="productImageUrl.invalid && (productImageUrl.dirty || message)">
+                <div *ngIf="productImageUrl.errors.pattern">
+                    Product image URL does not match pattern.
+                </div>
+                <div  *ngIf="productImageUrl.errors.required">
+                    Product image URL is required.
+                </div>
+            </div>
+
+            <div>
+                <input type="checkbox" ngModel name="isOnSale" placeholder="isOnSale">On sale
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Create</button>
+        <br>
+
+        {{message}}
+    </form>
+</div>-
